@@ -1,0 +1,16 @@
+[20:45:39] [Core] Logging started for: 27/03/24
+[20:45:39] [Core] Loaded hook module.
+[20:45:39] [Core] Loaded cvar module.
+[20:45:39] [Core] Loaded time module.
+[20:45:39] [Core] Loaded file module.
+[20:45:39] [Core] Loaded routines module.
+[20:45:39] [Core] Finished loading engine modules.
+[20:45:39] [Core] Applied seed to random generator: 1711593939
+[20:45:39] [Core] Setting up CVars...
+[20:45:39] [CVARS] Restoring CVars from save file...
+[20:45:39] [CVARS] Restored [4] CVars from data.
+[20:45:39] [CVARS] Saved CVars.
+[20:45:42] [Core] Preparing for shutdown...
+[20:45:42] [CVARS] Saving CVars...
+[20:45:42] [CVARS] Saved CVars.
+[20:45:42] [Core] Shutting down...
