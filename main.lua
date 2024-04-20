@@ -81,6 +81,7 @@ function love.draw()
         elseif(enemy.type == 3) then
             drawShip(assets.enemy_big, enemy.x, enemy.y)
         end
+    end
 
     love.graphics.setColor(1,1,1)
     drawShip(assets.player, player.x, player.y)
