@@ -36,7 +36,7 @@ function love.load()
     player.x = ScreenX()/2
     player.y = ScreenY() - 64
 
-    local padding = {x = 16, y = 8}
+    local padding = {x = 16, y = 16}
     local enemiesX = 12
     local enemiesY = 5
     local enemyGridX = ScreenX()/2 - ((enemiesX * (shipSize + padding.x))/2)
@@ -50,17 +50,39 @@ function love.load()
             local type = math.random(1,3)
             enemy.type = type
             enemy.hp = type
+            enemy.gridX = x
+            enemy.gridY = y
+            enemy.speed = 20
             table.insert(enemies, enemy)
         end
     end
 end
 
+swapTimer = 2
+enemyDir = 1
 function love.update(deltaTime)
-
+    swapTimer = swapTimer - 1
     if (love.keyboard.isDown("d")) then
         player.x = player.x + player.speed * deltaTime
     elseif (love.keyboard.isDown("a")) then
         player.x = player.x - player.speed * deltaTime
+    end
+
+    if (swapTimer <= 0) then
+        swapTimer = 30
+        if (enemyDir > 0) then
+            enemyDir = -1
+        else
+            enemyDir = 1
+        end
+    end
+
+    for _, enemy in ipairs(enemies) do
+        if (enemy.gridX % 2 == 0) then
+            enemy.x = enemy.x + ((enemy.speed * deltaTime) * enemyDir)
+        else
+            enemy.x = enemy.x - ((enemy.speed * deltaTime) * enemyDir)
+        end
     end
 
     love.timer.sleep(1/fps)
@@ -70,10 +92,9 @@ function love.draw()
 
     love.graphics.setColor(0.7,0.7,0.7)
     love.graphics.rectangle("fill", 0,0, 64, ScreenY())
+    love.graphics.setColor(1,1,1)
 
     for _, enemy in ipairs(enemies) do
-        love.graphics.setColor(1,0,0)
-        
         if (enemy.type == 1) then
             drawShip(assets.enemy_small, enemy.x, enemy.y)
         elseif(enemy.type == 2) then
@@ -81,6 +102,10 @@ function love.draw()
         elseif(enemy.type == 3) then
             drawShip(assets.enemy_big, enemy.x, enemy.y)
         end
+    end
+
+    for i = 1, player.hp do
+        love.graphics.draw(assets.heart, 2, 4 + 64 * (i-1), 0, 4, 4)
     end
 
     love.graphics.setColor(1,1,1)
