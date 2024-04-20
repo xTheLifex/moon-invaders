@@ -1,5 +1,6 @@
 
-
+player = {}
+enemies = {}
 
 function love.load()
 
