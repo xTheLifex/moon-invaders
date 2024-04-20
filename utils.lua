@@ -282,3 +282,9 @@ end
 
 Vector = utils.Vector
 Vec = utils.Vector
+
+function UnixTime()
+	return os.time(os.date("!*t"))
+end
+
+DateTime = UnixTime
